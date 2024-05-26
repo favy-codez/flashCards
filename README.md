@@ -38,3 +38,11 @@ onClick={() =>handleClick(question.id)}
 - In this approach, an arrow function is used as the event handler. When the onClick event occurs, this arrow function is called, and it, in turn, invokes the handleClick function with question.id as an argument.
 - One consequence of this approach is that a new function instance is created every time the component re-renders. If this component is rendered frequently or is part of a large list, this can lead to performance issues due to unnecessary re-renders.
 - If you need to pass additional parameters or want to ensure fresh data when the event occurs, this can be used.
+
+```
+setSelectedId(id !== selectedId ? id : null);
+```
+- id: This is the id of the flashcard that was clicked. It's passed to the handleClick function when the user clicks on a flashcard.
+- This line uses the setSelectedId function, which is a state updater function from the useState hook. The goal is to update the state variable selectedId based on the id of the clicked flashcard.
+- Deselecting the current flashcard: If the id of the clicked flashcard is the same as the currently selected flashcard (id === selectedId), the selectedId state is set to null, effectively deselecting the flashcard.
+- This logic ensures that only one flashcard can be selected at a time and clicking on a selected flashcard will deselect it.

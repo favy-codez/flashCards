@@ -1,14 +1,13 @@
-import './App.css';
+import { useState } from "react";
+import "./App.css";
 
 export default function App() {
   return (
     <>
-    <h1>favour</h1>
+      <Flashcards />
     </>
   );
 }
-
-
 
 const questions = [
   {
@@ -44,3 +43,30 @@ const questions = [
   },
 ];
 
+function Flashcards() {
+  // we want nothing to be selected by default
+  const [selectedId, setSelectedId] = useState(null);
+
+  // this fxn need to recieve the id
+  function handleClick(id){
+    // so we can use it here
+    setSelectedId(id !==  selectedId ? id : null)
+  }
+
+  return (
+    <div className="flashcards">
+      {questions.map((question) => (
+        <div
+          key={question.id}
+          // we need to call the fxn with the id
+          // we also need to pass a fxn not a fxn call like we have here
+          // onClick={handleClick(question.id)}
+          onClick={() => handleClick(question.id)}
+          className={question.id === selectedId ? "selected" : ""}
+        >
+          <p>{question.id === selectedId ? question.answer : question.question}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
